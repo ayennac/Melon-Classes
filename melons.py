@@ -10,6 +10,8 @@ class AbstractMelonOrder:
     def __init__(self, species, qty):
         self.species = species
         self.qty = qty
+        if self.qty > 100:
+            raise TooManyMelonsError("No more than 100 melons!")
         self.shipped = False
         self.base_price = 0
         self.order_time = datetime.today()
@@ -79,6 +81,4 @@ class GovernmentMelonOrder(AbstractMelonOrder):
 
 class TooManyMelonsError(ValueError):
     def __init__(self, message):
-        self.message = "No more than 100 melons!"
-        if self.qty > 100:
-            raise TooManyMelonsError(message)
+        super().__init__(message)

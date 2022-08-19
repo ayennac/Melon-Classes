@@ -75,3 +75,10 @@ class GovernmentMelonOrder(AbstractMelonOrder):
     def mark_inspection(self, passed):
         if passed == True:
             self.passed_inspection = True
+
+
+class TooManyMelonsError(ValueError):
+    def __init__(self, message):
+        self.message = "No more than 100 melons!"
+        if self.qty > 100:
+            raise TooManyMelonsError(message)
